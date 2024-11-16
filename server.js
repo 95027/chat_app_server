@@ -1,0 +1,23 @@
+const express = require("express");
+require("dotenv").config();
+const cors = require('cors');
+
+
+const app = express();
+
+const corsOptions = {
+    origin: ["http://localhost:5173"],
+}
+
+app.use(cors(corsOptions));
+app.use(express.json());
+
+
+
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "server is running" });
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => `server is running on ${PORT}`);
