@@ -8,7 +8,7 @@ const routes = require('./src/routes');
 const app = express();
 
 const corsOptions = {
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "https://chap-app-eight.vercel.app"],
 }
 
 app.use(cors(corsOptions));
