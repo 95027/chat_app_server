@@ -2,6 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const cors = require('cors');
 const connectDB = require('./config/connectDB');
+const cookieParser = require('cookie-parser');
 const routes = require('./src/routes');
 
 
@@ -10,11 +11,12 @@ const app = express();
 const corsOptions = {
     origin: ["http://localhost:5173", "https://chap-app-eight.vercel.app"],
     credentials: true,
-    allowedHeaders: ["Content-type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization", "Cookies"]
 }
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/v1", routes);
 
