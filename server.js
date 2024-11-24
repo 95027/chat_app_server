@@ -11,7 +11,6 @@ const app = express();
 const corsOptions = {
     origin: ["http://localhost:5173", "https://chap-app-eight.vercel.app"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization", "Cookies"]
 }
 
 app.use(cors(corsOptions));
