@@ -1,25 +1,23 @@
 const express = require("express");
 require("dotenv").config();
-const cors = require('cors');
-const connectDB = require('./config/connectDB');
-const cookieParser = require('cookie-parser');
-const routes = require('./src/routes');
+const cors = require("cors");
+const connectDB = require("./config/connectDB");
+const cookieParser = require("cookie-parser");
+const routes = require("./src/routes");
+const { app, server } = require("./src/socket");
 
-
-const app = express();
+//const app = express();
 
 const corsOptions = {
-    origin: ["http://localhost:5173", "https://chap-app-eight.vercel.app"],
-    credentials: true,
-}
+  origin: ["http://localhost:5173", "https://chap-app-eight.vercel.app"],
+  credentials: true,
+};
 
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
 app.use("/v1", routes);
-
-
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "server is running" });
@@ -28,6 +26,5 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 connectDB().then(() => {
-    app.listen(PORT, () => console.log(`server is running on ${PORT}`));
+  server.listen(PORT, () => console.log(`server is running on ${PORT}`));
 });
-
