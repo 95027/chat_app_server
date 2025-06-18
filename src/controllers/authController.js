@@ -43,7 +43,7 @@ const login = async (req, res, next) => {
       return res.status(400).json({ message: "invalid user name or email" });
     }
 
-    const token = jwt.sign({ id: user?.id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user?._id }, process.env.JWT_SECRET, {
       expiresIn: "12h",
     });
 
