@@ -2,6 +2,7 @@ const express = require("express");
 const { Server } = require("socket.io");
 const http = require("http");
 const jwt = require("jsonwebtoken");
+const cookie = require("cookie");
 
 const app = express();
 
@@ -14,10 +15,15 @@ const io = new Server(server, {
 });
 
 io.use((socket, next) => {
-  const token = socket.handshake.auth.token;
+  // const token = socket.handshake.auth.token;
 
-  if (!token) return next(new Error("No token"));
-  
+  // if (!token) return next(new Error("No token"));
+
+  const cookies = socket.request.headers.cookie;
+  if (!cookies) return next(new Error("No cookie"));
+
+  const parsed = cookie.parse(cookies);
+  const token = parsed.token;
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
