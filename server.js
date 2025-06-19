@@ -4,14 +4,9 @@ const cors = require("cors");
 const connectDB = require("./config/connectDB");
 const cookieParser = require("cookie-parser");
 const routes = require("./src/routes");
-const { app, server } = require("./src/socket");
+const { app, server, corsOptions } = require("./src/socket");
 
 //const app = express();
-
-const corsOptions = {
-  origin: ["http://localhost:5173", "https://chap-app-eight.vercel.app"],
-  credentials: true,
-};
 
 app.use(cors(corsOptions));
 app.use(express.json());

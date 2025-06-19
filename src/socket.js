@@ -7,11 +7,14 @@ const cookie = require("cookie");
 const app = express();
 
 const server = http.createServer(app);
+
+const corsOptions = {
+  origin: ["http://localhost:5173", "https://chap-app-eight.vercel.app"],
+  credentials: true,
+};
+
 const io = new Server(server, {
-  cors: {
-    origin: ["http://localhost:5173", "https://chap-app-eight.vercel.app"],
-    credentials: true,
-  },
+  cors: corsOptions,
 });
 
 io.use((socket, next) => {
@@ -57,4 +60,5 @@ io.on("connection", (socket) => {
 module.exports = {
   app,
   server,
+  corsOptions,
 };
