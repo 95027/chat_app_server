@@ -14,10 +14,7 @@ const corsOptions = {
 };
 
 const io = new Server(server, {
-  cors: {
-    origin: "*",
-    credentials: true,
-  },
+  cors: corsOptions,
 });
 
 io.use((socket, next) => {
